@@ -49,7 +49,7 @@ public class User extends DateAudit {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User() {
+    public User(String name, String username, String email, String password) {
     }
 
     public User(Long id, String name, String username, String email, String password, Set<Role> roles) {

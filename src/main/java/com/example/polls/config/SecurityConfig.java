@@ -7,6 +7,7 @@ import com.example.polls.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,15 +18,18 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.stereotype.Component;
 
 @Configuration
 @EnableWebSecurity
+//@EnableJpaRepositories(basePackages="java", entityManagerFactoryRef="emf")
 public class SecurityConfig {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
-    @Bean
+
+    @Autowired
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
     }
@@ -55,7 +59,7 @@ public class SecurityConfig {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeHttpRequests().requestMatchers(
+                .authorizeRequests().requestMatchers(
                         "/",
                         "/favicon.ico",
                         "/**/*.png",

@@ -3,7 +3,8 @@ package com.example.polls.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -11,15 +12,14 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 @Component
-
 public class JwtTokenProvider {
      private static final Logger logger = (Logger) LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    @Value("{app.jwtSecret}")
-    private String jwtSecret;
+//    @Value("{app.jwtSecret}")
+    private String jwtSecret = "eyJhbGciOiJIUzUxMiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY3NzM5NDU1OCwiaWF0IjoxNjc3Mzk0NTU4fQ.5e6U-4YDDpWIJ__Qq9akC9-MdpM2A1LHAatw0SGg0ObXyPe5hjBdIaFUN6Vqat8z9avHHqUO5TcfzsNdjX9wbg";
 
-    @Value("{app.jwtExpirationInMs}")
-    private int jwtExpirationInMs;
+//    @Value("{app.jwtExpirationInMs}")
+    private int jwtExpirationInMs = 86400000;
 
     public String generateToken(Authentication authentication) {
 
